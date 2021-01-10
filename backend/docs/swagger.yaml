@@ -1,0 +1,980 @@
+basePath: /api/v1
+definitions:
+  controllers.Operativerecord:
+    properties:
+      added:
+        type: string
+      examinationroom:
+        type: integer
+      nurse:
+        type: integer
+      operative:
+        type: integer
+      tool:
+        type: integer
+    type: object
+  ent.Examinationroom:
+    properties:
+      edges:
+        $ref: '#/definitions/ent.ExaminationroomEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the ExaminationroomQuery when eager-loading is set.
+        type: object
+      examinationroom_name:
+        description: ExaminationroomName holds the value of the "examinationroom_name"
+          field.
+        type: string
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.ExaminationroomEdges:
+    properties:
+      examinationroomOperativerecord:
+        description: ExaminationroomOperativerecord holds the value of the Examinationroom_Operativerecord
+          edge.
+        items:
+          $ref: '#/definitions/ent.Operativerecord'
+        type: array
+    type: object
+  ent.Nurse:
+    properties:
+      edges:
+        $ref: '#/definitions/ent.NurseEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the NurseQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+      nurse_Email:
+        description: NurseEmail holds the value of the "nurse_Email" field.
+        type: string
+      nurse_Name:
+        description: NurseName holds the value of the "nurse_Name" field.
+        type: string
+      nurse_Password:
+        description: NursePassword holds the value of the "nurse_Password" field.
+        type: string
+      nurse_Tel:
+        description: NurseTel holds the value of the "nurse_Tel" field.
+        type: string
+    type: object
+  ent.NurseEdges:
+    properties:
+      nurseOperativerecord:
+        description: NurseOperativerecord holds the value of the Nurse_Operativerecord
+          edge.
+        items:
+          $ref: '#/definitions/ent.Operativerecord'
+        type: array
+    type: object
+  ent.Operative:
+    properties:
+      edges:
+        $ref: '#/definitions/ent.OperativeEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the OperativeQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+      operative_Name:
+        description: OperativeName holds the value of the "operative_Name" field.
+        type: string
+      operative_Type:
+        description: OperativeType holds the value of the "operative_Type" field.
+        type: string
+    type: object
+  ent.OperativeEdges:
+    properties:
+      operativeOperativerecord:
+        description: OperativeOperativerecord holds the value of the Operative_Operativerecord
+          edge.
+        items:
+          $ref: '#/definitions/ent.Operativerecord'
+        type: array
+    type: object
+  ent.Operativerecord:
+    properties:
+      OperativeTime:
+        description: OperativeTime holds the value of the "OperativeTime" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.OperativerecordEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the OperativerecordQuery when eager-loading is set.
+        type: object
+      examinationroom_id:
+        type: integer
+      id:
+        description: ID of the ent.
+        type: integer
+      nurse_id:
+        type: integer
+      operative_id:
+        type: integer
+      tool_id:
+        type: integer
+    type: object
+  ent.OperativerecordEdges:
+    properties:
+      examinationroom:
+        $ref: '#/definitions/ent.Examinationroom'
+        description: Examinationroom holds the value of the Examinationroom edge.
+        type: object
+      nurse:
+        $ref: '#/definitions/ent.Nurse'
+        description: Nurse holds the value of the Nurse edge.
+        type: object
+      operative:
+        $ref: '#/definitions/ent.Operative'
+        description: Operative holds the value of the Operative edge.
+        type: object
+      tool:
+        $ref: '#/definitions/ent.Tool'
+        description: Tool holds the value of the Tool edge.
+        type: object
+    type: object
+  ent.Tool:
+    properties:
+      Tool_Amount:
+        description: ToolAmount holds the value of the "Tool_Amount" field.
+        type: string
+      Tool_Name:
+        description: ToolName holds the value of the "Tool_Name" field.
+        type: string
+      edges:
+        $ref: '#/definitions/ent.ToolEdges'
+        description: |-
+          Edges holds the relations/edges for other nodes in the graph.
+          The values are being populated by the ToolQuery when eager-loading is set.
+        type: object
+      id:
+        description: ID of the ent.
+        type: integer
+    type: object
+  ent.ToolEdges:
+    properties:
+      toolOperativerecord:
+        description: ToolOperativerecord holds the value of the Tool_Operativerecord
+          edge.
+        items:
+          $ref: '#/definitions/ent.Operativerecord'
+        type: array
+    type: object
+  gin.H:
+    additionalProperties: true
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server for SUT SE 2563
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: SUT SA Example API
+  version: "1.0"
+paths:
+  /examinationrooms:
+    get:
+      description: list examinationroom entities
+      operationId: list-examinationroom
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Examinationroom'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List examinationroom entities
+    post:
+      consumes:
+      - application/json
+      description: Create examinationroom
+      operationId: create-examinationroom
+      parameters:
+      - description: Examinationroom entity
+        in: body
+        name: examinationroom
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Examinationroom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Examinationroom'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create examinationroom
+  /examinationrooms/{id}:
+    delete:
+      description: get examinationroom by ID
+      operationId: delete-examinationroom
+      parameters:
+      - description: examinationroom ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a examinationroom entity by ID
+    get:
+      description: get examinationroom by ID
+      operationId: get-examinationroom
+      parameters:
+      - description: Examinationroom ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Examinationroom'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a examinationroom entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update examinationroom by ID
+      operationId: update-examinationroom
+      parameters:
+      - description: examinationroom ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: examinationroom entity
+        in: body
+        name: examinationroom
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Examinationroom'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Examinationroom'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a examinationroom entity by ID
+  /nurses:
+    get:
+      description: list nurse entities
+      operationId: list-nurse
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Nurse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List nurse entities
+    post:
+      consumes:
+      - application/json
+      description: Create nurse
+      operationId: create-nurse
+      parameters:
+      - description: Nurse entity
+        in: body
+        name: nurse
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Nurse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Nurse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create nurse
+  /nurses/{id}:
+    delete:
+      description: get nurse by ID
+      operationId: delete-nurse
+      parameters:
+      - description: nurse ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a nurse entity by ID
+    get:
+      description: get nurse by ID
+      operationId: get-nurse
+      parameters:
+      - description: Nurse ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Nurse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a nurse entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update nurse by ID
+      operationId: update-nurse
+      parameters:
+      - description: nurse ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: nurse entity
+        in: body
+        name: nurse
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Nurse'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Nurse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a nurse entity by ID
+  /operativerecords:
+    get:
+      description: list operativerecord entities
+      operationId: list-operativerecord
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Operativerecord'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List operativerecord entities
+    post:
+      consumes:
+      - application/json
+      description: Create operativerecord
+      operationId: create-operativerecord
+      parameters:
+      - description: Operativerecord entity
+        in: body
+        name: operativerecord
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.Operativerecord'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Operativerecord'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create operativerecord
+  /operativerecords/{id}:
+    delete:
+      description: get operativerecord by ID
+      operationId: delete-operativerecord
+      parameters:
+      - description: Operativerecord ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a operativerecord entity by ID
+    get:
+      description: get operativerecord by ID
+      operationId: get-operativerecord
+      parameters:
+      - description: Operativerecord ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Operativerecord'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a operativerecord entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update operativerecord by ID
+      operationId: update-operativerecord
+      parameters:
+      - description: Operativerecord ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Operativerecord entity
+        in: body
+        name: operativerecord
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Operativerecord'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Operativerecord'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a operativerecord entity by ID
+  /operatives:
+    get:
+      description: list operative entities
+      operationId: list-operative
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Operative'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List operative entities
+    post:
+      consumes:
+      - application/json
+      description: Create operative
+      operationId: create-operative
+      parameters:
+      - description: Operative entity
+        in: body
+        name: operative
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Operative'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Operative'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create operative
+  /operatives/{id}:
+    delete:
+      description: get operative by ID
+      operationId: delete-operative
+      parameters:
+      - description: operative ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a operative entity by ID
+    get:
+      description: get operative by ID
+      operationId: get-operative
+      parameters:
+      - description: Operative ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Operative'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a operative entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update operative by ID
+      operationId: update-operative
+      parameters:
+      - description: operative ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Operative entity
+        in: body
+        name: operative
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Operative'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Operative'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a operative entity by ID
+  /tools:
+    get:
+      description: list tool entities
+      operationId: list-tool
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Offset
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/ent.Tool'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: List tool entities
+    post:
+      consumes:
+      - application/json
+      description: Create tool
+      operationId: create-tool
+      parameters:
+      - description: Tool entity
+        in: body
+        name: tool
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Tool'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Tool'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create tool
+  /tools/{id}:
+    delete:
+      description: get tool by ID
+      operationId: delete-tool
+      parameters:
+      - description: tool ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gin.H'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Delete a tool entity by ID
+    get:
+      description: get tool by ID
+      operationId: get-tool
+      parameters:
+      - description: Tool ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Tool'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Get a tool entity by ID
+    put:
+      consumes:
+      - application/json
+      description: update tool by ID
+      operationId: update-tool
+      parameters:
+      - description: tool ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Tool entity
+        in: body
+        name: tool
+        required: true
+        schema:
+          $ref: '#/definitions/ent.Tool'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ent.Tool'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Update a tool entity by ID
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+  OAuth2AccessCode:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: accessCode
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Application:
+    authorizationUrl: ""
+    flow: application
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+  OAuth2Implicit:
+    authorizationUrl: https://example.com/oauth/authorize
+    flow: implicit
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      write: ' Grants write access'
+    type: oauth2
+  OAuth2Password:
+    authorizationUrl: ""
+    flow: password
+    scopes:
+      admin: ' Grants read and write access to administrative information'
+      read: ' Grants read access'
+      write: ' Grants write access'
+    tokenUrl: https://example.com/oauth/token
+    type: oauth2
+swagger: "2.0"
