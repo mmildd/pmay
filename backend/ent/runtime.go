@@ -43,12 +43,8 @@ func init() {
 	nurse.NurseTelValidator = nurseDescNurseTel.Validators[0].(func(string) error)
 	operativeFields := schema.Operative{}.Fields()
 	_ = operativeFields
-	// operativeDescOperativeType is the schema descriptor for operative_Type field.
-	operativeDescOperativeType := operativeFields[0].Descriptor()
-	// operative.OperativeTypeValidator is a validator for the "operative_Type" field. It is called by the builders before save.
-	operative.OperativeTypeValidator = operativeDescOperativeType.Validators[0].(func(string) error)
 	// operativeDescOperativeName is the schema descriptor for operative_Name field.
-	operativeDescOperativeName := operativeFields[1].Descriptor()
+	operativeDescOperativeName := operativeFields[0].Descriptor()
 	// operative.OperativeNameValidator is a validator for the "operative_Name" field. It is called by the builders before save.
 	operative.OperativeNameValidator = operativeDescOperativeName.Validators[0].(func(string) error)
 	operativerecordFields := schema.Operativerecord{}.Fields()
@@ -63,8 +59,4 @@ func init() {
 	toolDescToolName := toolFields[0].Descriptor()
 	// tool.ToolNameValidator is a validator for the "Tool_Name" field. It is called by the builders before save.
 	tool.ToolNameValidator = toolDescToolName.Validators[0].(func(string) error)
-	// toolDescToolAmount is the schema descriptor for Tool_Amount field.
-	toolDescToolAmount := toolFields[1].Descriptor()
-	// tool.ToolAmountValidator is a validator for the "Tool_Amount" field. It is called by the builders before save.
-	tool.ToolAmountValidator = toolDescToolAmount.Validators[0].(func(string) error)
 }

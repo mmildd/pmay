@@ -7,8 +7,6 @@ const (
 	Label = "operative"
 	// FieldID holds the string denoting the id field in the database.
 	FieldID = "id"
-	// FieldOperativeType holds the string denoting the operative_type field in the database.
-	FieldOperativeType = "operative_type"
 	// FieldOperativeName holds the string denoting the operative_name field in the database.
 	FieldOperativeName = "operative_name"
 
@@ -29,13 +27,10 @@ const (
 // Columns holds all SQL columns for operative fields.
 var Columns = []string{
 	FieldID,
-	FieldOperativeType,
 	FieldOperativeName,
 }
 
 var (
-	// OperativeTypeValidator is a validator for the "operative_Type" field. It is called by the builders before save.
-	OperativeTypeValidator func(string) error
 	// OperativeNameValidator is a validator for the "operative_Name" field. It is called by the builders before save.
 	OperativeNameValidator func(string) error
 )

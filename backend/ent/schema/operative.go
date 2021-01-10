@@ -12,7 +12,6 @@ type Operative struct {
 // Fields of the Operative.
 func (Operative) Fields() []ent.Field {
     return []ent.Field{
-		field.String("operative_Type").NotEmpty(),
 		field.String("operative_Name").NotEmpty().Unique(),
     }
  }

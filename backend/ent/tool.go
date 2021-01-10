@@ -17,8 +17,6 @@ type Tool struct {
 	ID int `json:"id,omitempty"`
 	// ToolName holds the value of the "Tool_Name" field.
 	ToolName string `json:"Tool_Name,omitempty"`
-	// ToolAmount holds the value of the "Tool_Amount" field.
-	ToolAmount string `json:"Tool_Amount,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the ToolQuery when eager-loading is set.
 	Edges ToolEdges `json:"edges"`
@@ -47,7 +45,6 @@ func (*Tool) scanValues() []interface{} {
 	return []interface{}{
 		&sql.NullInt64{},  // id
 		&sql.NullString{}, // Tool_Name
-		&sql.NullString{}, // Tool_Amount
 	}
 }
 
@@ -67,11 +64,6 @@ func (t *Tool) assignValues(values ...interface{}) error {
 		return fmt.Errorf("unexpected type %T for field Tool_Name", values[0])
 	} else if value.Valid {
 		t.ToolName = value.String
-	}
-	if value, ok := values[1].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field Tool_Amount", values[1])
-	} else if value.Valid {
-		t.ToolAmount = value.String
 	}
 	return nil
 }
@@ -106,8 +98,6 @@ func (t *Tool) String() string {
 	builder.WriteString(fmt.Sprintf("id=%v", t.ID))
 	builder.WriteString(", Tool_Name=")
 	builder.WriteString(t.ToolName)
-	builder.WriteString(", Tool_Amount=")
-	builder.WriteString(t.ToolAmount)
 	builder.WriteByte(')')
 	return builder.String()
 }

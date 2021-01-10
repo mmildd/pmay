@@ -13,7 +13,6 @@ type Tool struct {
 func (Tool) Fields() []ent.Field {
     return []ent.Field{
         field.String("Tool_Name").NotEmpty(),
-		field.String("Tool_Amount").NotEmpty(),
 		
     }
  }

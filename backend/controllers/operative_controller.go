@@ -37,7 +37,6 @@ func (ctl *OperativeController) CreateOperative(c *gin.Context) {
 	f, err := ctl.client.Operative.
 		Create().
 		SetOperativeName(obj.OperativeName).
-		SetOperativeType(obj.OperativeType).
 		Save(context.Background())
 	if err != nil {
 		c.JSON(400, gin.H{
@@ -184,7 +183,6 @@ func (ctl *OperativeController) UpdateOperative(c *gin.Context) {
 	f, err := ctl.client.Operative.
 		UpdateOne(&obj).
 		SetOperativeName(obj.OperativeName).
-		SetOperativeType(obj.OperativeType).
 		Save(context.Background())
 	if err != nil {
 		c.JSON(400, gin.H{"error": "update failed",})

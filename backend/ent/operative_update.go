@@ -28,12 +28,6 @@ func (ou *OperativeUpdate) Where(ps ...predicate.Operative) *OperativeUpdate {
 	return ou
 }
 
-// SetOperativeType sets the operative_Type field.
-func (ou *OperativeUpdate) SetOperativeType(s string) *OperativeUpdate {
-	ou.mutation.SetOperativeType(s)
-	return ou
-}
-
 // SetOperativeName sets the operative_Name field.
 func (ou *OperativeUpdate) SetOperativeName(s string) *OperativeUpdate {
 	ou.mutation.SetOperativeName(s)
@@ -77,11 +71,6 @@ func (ou *OperativeUpdate) RemoveOperativeOperativerecord(o ...*Operativerecord)
 
 // Save executes the query and returns the number of rows/vertices matched by this operation.
 func (ou *OperativeUpdate) Save(ctx context.Context) (int, error) {
-	if v, ok := ou.mutation.OperativeType(); ok {
-		if err := operative.OperativeTypeValidator(v); err != nil {
-			return 0, &ValidationError{Name: "operative_Type", err: fmt.Errorf("ent: validator failed for field \"operative_Type\": %w", err)}
-		}
-	}
 	if v, ok := ou.mutation.OperativeName(); ok {
 		if err := operative.OperativeNameValidator(v); err != nil {
 			return 0, &ValidationError{Name: "operative_Name", err: fmt.Errorf("ent: validator failed for field \"operative_Name\": %w", err)}
@@ -155,13 +144,6 @@ func (ou *OperativeUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			}
 		}
 	}
-	if value, ok := ou.mutation.OperativeType(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: operative.FieldOperativeType,
-		})
-	}
 	if value, ok := ou.mutation.OperativeName(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,
@@ -225,12 +207,6 @@ type OperativeUpdateOne struct {
 	mutation *OperativeMutation
 }
 
-// SetOperativeType sets the operative_Type field.
-func (ouo *OperativeUpdateOne) SetOperativeType(s string) *OperativeUpdateOne {
-	ouo.mutation.SetOperativeType(s)
-	return ouo
-}
-
 // SetOperativeName sets the operative_Name field.
 func (ouo *OperativeUpdateOne) SetOperativeName(s string) *OperativeUpdateOne {
 	ouo.mutation.SetOperativeName(s)
@@ -274,11 +250,6 @@ func (ouo *OperativeUpdateOne) RemoveOperativeOperativerecord(o ...*Operativerec
 
 // Save executes the query and returns the updated entity.
 func (ouo *OperativeUpdateOne) Save(ctx context.Context) (*Operative, error) {
-	if v, ok := ouo.mutation.OperativeType(); ok {
-		if err := operative.OperativeTypeValidator(v); err != nil {
-			return nil, &ValidationError{Name: "operative_Type", err: fmt.Errorf("ent: validator failed for field \"operative_Type\": %w", err)}
-		}
-	}
 	if v, ok := ouo.mutation.OperativeName(); ok {
 		if err := operative.OperativeNameValidator(v); err != nil {
 			return nil, &ValidationError{Name: "operative_Name", err: fmt.Errorf("ent: validator failed for field \"operative_Name\": %w", err)}
@@ -350,13 +321,6 @@ func (ouo *OperativeUpdateOne) sqlSave(ctx context.Context) (o *Operative, err e
 		return nil, &ValidationError{Name: "ID", err: fmt.Errorf("missing Operative.ID for update")}
 	}
 	_spec.Node.ID.Value = id
-	if value, ok := ouo.mutation.OperativeType(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: operative.FieldOperativeType,
-		})
-	}
 	if value, ok := ouo.mutation.OperativeName(); ok {
 		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,

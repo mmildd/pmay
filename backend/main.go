@@ -136,32 +136,30 @@ func main() {
 	// Set Tool Data
 	tools := Tools{
 		Tool: []Tool{
-			Tool{"เข็ม", "1"},
-			Tool{"ถุงน้ำเกลือ", "3"},
-			Tool{"เครื่องมือทำคลอด", "3"},
+			Tool{"เข็ม"},
+			Tool{"ถุงน้ำเกลือ"},
+			Tool{"เครื่องมือทำคลอด"},
 		},
 	}
 	for _, t := range tools.Tool {
 		client.Tool.
 			Create().
 			SetToolName(t.ToolName).
-			SetToolAmount(t.ToolAmount).
 			Save(context.Background())
 	}
 
 	// Set Operative Data
 	operatives := Operatives{
 		Operative: []Operative{
-			Operative{"ผ่าตัด", "ศัลยศาสตร์"},
-			Operative{"เย็บแผล", "ฉุกเฉิน"},
-			Operative{"ให้น้ำเกลือ", "ทั่วไป"},
+			Operative{"ผ่าตัด"},
+			Operative{"เย็บแผล"},
+			Operative{"ให้น้ำเกลือ"},
 		},
 	}
 	for _, o := range operatives.Operative {
 		client.Operative.
 			Create().
 			SetOperativeName(o.OperativeName).
-			SetOperativeType(o.OperativeType).
 			Save(context.Background())
 	}
 

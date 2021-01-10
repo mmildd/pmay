@@ -20,12 +20,6 @@ type OperativeCreate struct {
 	hooks    []Hook
 }
 
-// SetOperativeType sets the operative_Type field.
-func (oc *OperativeCreate) SetOperativeType(s string) *OperativeCreate {
-	oc.mutation.SetOperativeType(s)
-	return oc
-}
-
 // SetOperativeName sets the operative_Name field.
 func (oc *OperativeCreate) SetOperativeName(s string) *OperativeCreate {
 	oc.mutation.SetOperativeName(s)
@@ -54,14 +48,6 @@ func (oc *OperativeCreate) Mutation() *OperativeMutation {
 
 // Save creates the Operative in the database.
 func (oc *OperativeCreate) Save(ctx context.Context) (*Operative, error) {
-	if _, ok := oc.mutation.OperativeType(); !ok {
-		return nil, &ValidationError{Name: "operative_Type", err: errors.New("ent: missing required field \"operative_Type\"")}
-	}
-	if v, ok := oc.mutation.OperativeType(); ok {
-		if err := operative.OperativeTypeValidator(v); err != nil {
-			return nil, &ValidationError{Name: "operative_Type", err: fmt.Errorf("ent: validator failed for field \"operative_Type\": %w", err)}
-		}
-	}
 	if _, ok := oc.mutation.OperativeName(); !ok {
 		return nil, &ValidationError{Name: "operative_Name", err: errors.New("ent: missing required field \"operative_Name\"")}
 	}
@@ -130,14 +116,6 @@ func (oc *OperativeCreate) createSpec() (*Operative, *sqlgraph.CreateSpec) {
 			},
 		}
 	)
-	if value, ok := oc.mutation.OperativeType(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: operative.FieldOperativeType,
-		})
-		o.OperativeType = value
-	}
 	if value, ok := oc.mutation.OperativeName(); ok {
 		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
 			Type:   field.TypeString,

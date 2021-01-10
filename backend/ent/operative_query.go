@@ -270,12 +270,12 @@ func (oq *OperativeQuery) WithOperativeOperativerecord(opts ...func(*Operativere
 // Example:
 //
 //	var v []struct {
-//		OperativeType string `json:"operative_Type,omitempty"`
+//		OperativeName string `json:"operative_Name,omitempty"`
 //		Count int `json:"count,omitempty"`
 //	}
 //
 //	client.Operative.Query().
-//		GroupBy(operative.FieldOperativeType).
+//		GroupBy(operative.FieldOperativeName).
 //		Aggregate(ent.Count()).
 //		Scan(ctx, &v)
 //
@@ -296,11 +296,11 @@ func (oq *OperativeQuery) GroupBy(field string, fields ...string) *OperativeGrou
 // Example:
 //
 //	var v []struct {
-//		OperativeType string `json:"operative_Type,omitempty"`
+//		OperativeName string `json:"operative_Name,omitempty"`
 //	}
 //
 //	client.Operative.Query().
-//		Select(operative.FieldOperativeType).
+//		Select(operative.FieldOperativeName).
 //		Scan(ctx, &v)
 //
 func (oq *OperativeQuery) Select(field string, fields ...string) *OperativeSelect {

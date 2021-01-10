@@ -15,8 +15,6 @@ type Operative struct {
 	config `json:"-"`
 	// ID of the ent.
 	ID int `json:"id,omitempty"`
-	// OperativeType holds the value of the "operative_Type" field.
-	OperativeType string `json:"operative_Type,omitempty"`
 	// OperativeName holds the value of the "operative_Name" field.
 	OperativeName string `json:"operative_Name,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
@@ -46,7 +44,6 @@ func (e OperativeEdges) OperativeOperativerecordOrErr() ([]*Operativerecord, err
 func (*Operative) scanValues() []interface{} {
 	return []interface{}{
 		&sql.NullInt64{},  // id
-		&sql.NullString{}, // operative_Type
 		&sql.NullString{}, // operative_Name
 	}
 }
@@ -64,12 +61,7 @@ func (o *Operative) assignValues(values ...interface{}) error {
 	o.ID = int(value.Int64)
 	values = values[1:]
 	if value, ok := values[0].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field operative_Type", values[0])
-	} else if value.Valid {
-		o.OperativeType = value.String
-	}
-	if value, ok := values[1].(*sql.NullString); !ok {
-		return fmt.Errorf("unexpected type %T for field operative_Name", values[1])
+		return fmt.Errorf("unexpected type %T for field operative_Name", values[0])
 	} else if value.Valid {
 		o.OperativeName = value.String
 	}
@@ -104,8 +96,6 @@ func (o *Operative) String() string {
 	var builder strings.Builder
 	builder.WriteString("Operative(")
 	builder.WriteString(fmt.Sprintf("id=%v", o.ID))
-	builder.WriteString(", operative_Type=")
-	builder.WriteString(o.OperativeType)
 	builder.WriteString(", operative_Name=")
 	builder.WriteString(o.OperativeName)
 	builder.WriteByte(')')

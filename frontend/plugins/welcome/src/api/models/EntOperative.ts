@@ -44,12 +44,6 @@ export interface EntOperative {
      * @memberof EntOperative
      */
     operativeName?: string;
-    /**
-     * OperativeType holds the value of the "operative_Type" field.
-     * @type {string}
-     * @memberof EntOperative
-     */
-    operativeType?: string;
 }
 
 export function EntOperativeFromJSON(json: any): EntOperative {
@@ -65,7 +59,6 @@ export function EntOperativeFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'edges': !exists(json, 'edges') ? undefined : EntOperativeEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
         'operativeName': !exists(json, 'operative_Name') ? undefined : json['operative_Name'],
-        'operativeType': !exists(json, 'operative_Type') ? undefined : json['operative_Type'],
     };
 }
 
@@ -81,7 +74,6 @@ export function EntOperativeToJSON(value?: EntOperative | null): any {
         'edges': EntOperativeEdgesToJSON(value.edges),
         'id': value.id,
         'operative_Name': value.operativeName,
-        'operative_Type': value.operativeType,
     };
 }
 

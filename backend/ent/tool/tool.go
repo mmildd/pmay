@@ -9,8 +9,6 @@ const (
 	FieldID = "id"
 	// FieldToolName holds the string denoting the tool_name field in the database.
 	FieldToolName = "tool_name"
-	// FieldToolAmount holds the string denoting the tool_amount field in the database.
-	FieldToolAmount = "tool_amount"
 
 	// EdgeToolOperativerecord holds the string denoting the tool_operativerecord edge name in mutations.
 	EdgeToolOperativerecord = "Tool_Operativerecord"
@@ -30,12 +28,9 @@ const (
 var Columns = []string{
 	FieldID,
 	FieldToolName,
-	FieldToolAmount,
 }
 
 var (
 	// ToolNameValidator is a validator for the "Tool_Name" field. It is called by the builders before save.
 	ToolNameValidator func(string) error
-	// ToolAmountValidator is a validator for the "Tool_Amount" field. It is called by the builders before save.
-	ToolAmountValidator func(string) error
 )

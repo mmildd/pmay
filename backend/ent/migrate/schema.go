@@ -38,7 +38,6 @@ var (
 	// OperativesColumns holds the columns for the "operatives" table.
 	OperativesColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
-		{Name: "operative_type", Type: field.TypeString},
 		{Name: "operative_name", Type: field.TypeString, Unique: true},
 	}
 	// OperativesTable holds the schema information for the "operatives" table.
@@ -97,7 +96,6 @@ var (
 	ToolsColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeInt, Increment: true},
 		{Name: "tool_name", Type: field.TypeString},
-		{Name: "tool_amount", Type: field.TypeString},
 	}
 	// ToolsTable holds the schema information for the "tools" table.
 	ToolsTable = &schema.Table{

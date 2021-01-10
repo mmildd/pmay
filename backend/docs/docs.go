@@ -1272,10 +1272,6 @@ var doc = `{
                 "operative_Name": {
                     "description": "OperativeName holds the value of the \"operative_Name\" field.",
                     "type": "string"
-                },
-                "operative_Type": {
-                    "description": "OperativeType holds the value of the \"operative_Type\" field.",
-                    "type": "string"
                 }
             }
         },
@@ -1349,10 +1345,6 @@ var doc = `{
         "ent.Tool": {
             "type": "object",
             "properties": {
-                "Tool_Amount": {
-                    "description": "ToolAmount holds the value of the \"Tool_Amount\" field.",
-                    "type": "string"
-                },
                 "Tool_Name": {
                     "description": "ToolName holds the value of the \"Tool_Name\" field.",
                     "type": "string"

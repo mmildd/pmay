@@ -98,13 +98,6 @@ func ToolName(v string) predicate.Tool {
 	})
 }
 
-// ToolAmount applies equality check predicate on the "Tool_Amount" field. It's identical to ToolAmountEQ.
-func ToolAmount(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.EQ(s.C(FieldToolAmount), v))
-	})
-}
-
 // ToolNameEQ applies the EQ predicate on the "Tool_Name" field.
 func ToolNameEQ(v string) predicate.Tool {
 	return predicate.Tool(func(s *sql.Selector) {
@@ -213,117 +206,6 @@ func ToolNameEqualFold(v string) predicate.Tool {
 func ToolNameContainsFold(v string) predicate.Tool {
 	return predicate.Tool(func(s *sql.Selector) {
 		s.Where(sql.ContainsFold(s.C(FieldToolName), v))
-	})
-}
-
-// ToolAmountEQ applies the EQ predicate on the "Tool_Amount" field.
-func ToolAmountEQ(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.EQ(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountNEQ applies the NEQ predicate on the "Tool_Amount" field.
-func ToolAmountNEQ(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.NEQ(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountIn applies the In predicate on the "Tool_Amount" field.
-func ToolAmountIn(vs ...string) predicate.Tool {
-	v := make([]interface{}, len(vs))
-	for i := range v {
-		v[i] = vs[i]
-	}
-	return predicate.Tool(func(s *sql.Selector) {
-		// if not arguments were provided, append the FALSE constants,
-		// since we can't apply "IN ()". This will make this predicate falsy.
-		if len(v) == 0 {
-			s.Where(sql.False())
-			return
-		}
-		s.Where(sql.In(s.C(FieldToolAmount), v...))
-	})
-}
-
-// ToolAmountNotIn applies the NotIn predicate on the "Tool_Amount" field.
-func ToolAmountNotIn(vs ...string) predicate.Tool {
-	v := make([]interface{}, len(vs))
-	for i := range v {
-		v[i] = vs[i]
-	}
-	return predicate.Tool(func(s *sql.Selector) {
-		// if not arguments were provided, append the FALSE constants,
-		// since we can't apply "IN ()". This will make this predicate falsy.
-		if len(v) == 0 {
-			s.Where(sql.False())
-			return
-		}
-		s.Where(sql.NotIn(s.C(FieldToolAmount), v...))
-	})
-}
-
-// ToolAmountGT applies the GT predicate on the "Tool_Amount" field.
-func ToolAmountGT(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.GT(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountGTE applies the GTE predicate on the "Tool_Amount" field.
-func ToolAmountGTE(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.GTE(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountLT applies the LT predicate on the "Tool_Amount" field.
-func ToolAmountLT(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.LT(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountLTE applies the LTE predicate on the "Tool_Amount" field.
-func ToolAmountLTE(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.LTE(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountContains applies the Contains predicate on the "Tool_Amount" field.
-func ToolAmountContains(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.Contains(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountHasPrefix applies the HasPrefix predicate on the "Tool_Amount" field.
-func ToolAmountHasPrefix(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.HasPrefix(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountHasSuffix applies the HasSuffix predicate on the "Tool_Amount" field.
-func ToolAmountHasSuffix(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.HasSuffix(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountEqualFold applies the EqualFold predicate on the "Tool_Amount" field.
-func ToolAmountEqualFold(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.EqualFold(s.C(FieldToolAmount), v))
-	})
-}
-
-// ToolAmountContainsFold applies the ContainsFold predicate on the "Tool_Amount" field.
-func ToolAmountContainsFold(v string) predicate.Tool {
-	return predicate.Tool(func(s *sql.Selector) {
-		s.Where(sql.ContainsFold(s.C(FieldToolAmount), v))
 	})
 }
 

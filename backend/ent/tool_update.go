@@ -34,12 +34,6 @@ func (tu *ToolUpdate) SetToolName(s string) *ToolUpdate {
 	return tu
 }
 
-// SetToolAmount sets the Tool_Amount field.
-func (tu *ToolUpdate) SetToolAmount(s string) *ToolUpdate {
-	tu.mutation.SetToolAmount(s)
-	return tu
-}
-
 // AddToolOperativerecordIDs adds the Tool_Operativerecord edge to Operativerecord by ids.
 func (tu *ToolUpdate) AddToolOperativerecordIDs(ids ...int) *ToolUpdate {
 	tu.mutation.AddToolOperativerecordIDs(ids...)
@@ -80,11 +74,6 @@ func (tu *ToolUpdate) Save(ctx context.Context) (int, error) {
 	if v, ok := tu.mutation.ToolName(); ok {
 		if err := tool.ToolNameValidator(v); err != nil {
 			return 0, &ValidationError{Name: "Tool_Name", err: fmt.Errorf("ent: validator failed for field \"Tool_Name\": %w", err)}
-		}
-	}
-	if v, ok := tu.mutation.ToolAmount(); ok {
-		if err := tool.ToolAmountValidator(v); err != nil {
-			return 0, &ValidationError{Name: "Tool_Amount", err: fmt.Errorf("ent: validator failed for field \"Tool_Amount\": %w", err)}
 		}
 	}
 
@@ -162,13 +151,6 @@ func (tu *ToolUpdate) sqlSave(ctx context.Context) (n int, err error) {
 			Column: tool.FieldToolName,
 		})
 	}
-	if value, ok := tu.mutation.ToolAmount(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: tool.FieldToolAmount,
-		})
-	}
 	if nodes := tu.mutation.RemovedToolOperativerecordIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{
 			Rel:     sqlgraph.O2M,
@@ -231,12 +213,6 @@ func (tuo *ToolUpdateOne) SetToolName(s string) *ToolUpdateOne {
 	return tuo
 }
 
-// SetToolAmount sets the Tool_Amount field.
-func (tuo *ToolUpdateOne) SetToolAmount(s string) *ToolUpdateOne {
-	tuo.mutation.SetToolAmount(s)
-	return tuo
-}
-
 // AddToolOperativerecordIDs adds the Tool_Operativerecord edge to Operativerecord by ids.
 func (tuo *ToolUpdateOne) AddToolOperativerecordIDs(ids ...int) *ToolUpdateOne {
 	tuo.mutation.AddToolOperativerecordIDs(ids...)
@@ -277,11 +253,6 @@ func (tuo *ToolUpdateOne) Save(ctx context.Context) (*Tool, error) {
 	if v, ok := tuo.mutation.ToolName(); ok {
 		if err := tool.ToolNameValidator(v); err != nil {
 			return nil, &ValidationError{Name: "Tool_Name", err: fmt.Errorf("ent: validator failed for field \"Tool_Name\": %w", err)}
-		}
-	}
-	if v, ok := tuo.mutation.ToolAmount(); ok {
-		if err := tool.ToolAmountValidator(v); err != nil {
-			return nil, &ValidationError{Name: "Tool_Amount", err: fmt.Errorf("ent: validator failed for field \"Tool_Amount\": %w", err)}
 		}
 	}
 
@@ -355,13 +326,6 @@ func (tuo *ToolUpdateOne) sqlSave(ctx context.Context) (t *Tool, err error) {
 			Type:   field.TypeString,
 			Value:  value,
 			Column: tool.FieldToolName,
-		})
-	}
-	if value, ok := tuo.mutation.ToolAmount(); ok {
-		_spec.Fields.Set = append(_spec.Fields.Set, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: tool.FieldToolAmount,
 		})
 	}
 	if nodes := tuo.mutation.RemovedToolOperativerecordIDs(); len(nodes) > 0 {

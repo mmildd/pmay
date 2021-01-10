@@ -26,12 +26,6 @@ func (tc *ToolCreate) SetToolName(s string) *ToolCreate {
 	return tc
 }
 
-// SetToolAmount sets the Tool_Amount field.
-func (tc *ToolCreate) SetToolAmount(s string) *ToolCreate {
-	tc.mutation.SetToolAmount(s)
-	return tc
-}
-
 // AddToolOperativerecordIDs adds the Tool_Operativerecord edge to Operativerecord by ids.
 func (tc *ToolCreate) AddToolOperativerecordIDs(ids ...int) *ToolCreate {
 	tc.mutation.AddToolOperativerecordIDs(ids...)
@@ -60,14 +54,6 @@ func (tc *ToolCreate) Save(ctx context.Context) (*Tool, error) {
 	if v, ok := tc.mutation.ToolName(); ok {
 		if err := tool.ToolNameValidator(v); err != nil {
 			return nil, &ValidationError{Name: "Tool_Name", err: fmt.Errorf("ent: validator failed for field \"Tool_Name\": %w", err)}
-		}
-	}
-	if _, ok := tc.mutation.ToolAmount(); !ok {
-		return nil, &ValidationError{Name: "Tool_Amount", err: errors.New("ent: missing required field \"Tool_Amount\"")}
-	}
-	if v, ok := tc.mutation.ToolAmount(); ok {
-		if err := tool.ToolAmountValidator(v); err != nil {
-			return nil, &ValidationError{Name: "Tool_Amount", err: fmt.Errorf("ent: validator failed for field \"Tool_Amount\": %w", err)}
 		}
 	}
 	var (
@@ -137,14 +123,6 @@ func (tc *ToolCreate) createSpec() (*Tool, *sqlgraph.CreateSpec) {
 			Column: tool.FieldToolName,
 		})
 		t.ToolName = value
-	}
-	if value, ok := tc.mutation.ToolAmount(); ok {
-		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
-			Type:   field.TypeString,
-			Value:  value,
-			Column: tool.FieldToolAmount,
-		})
-		t.ToolAmount = value
 	}
 	if nodes := tc.mutation.ToolOperativerecordIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{

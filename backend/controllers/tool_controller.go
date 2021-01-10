@@ -37,7 +37,6 @@ func (ctl *ToolController) CreateTool(c *gin.Context) {
 	f, err := ctl.client.Tool.
 		Create().
 		SetToolName(obj.ToolName).
-		SetToolAmount(obj.ToolAmount).
 		Save(context.Background())
 	if err != nil {
 		c.JSON(400, gin.H{
@@ -184,7 +183,6 @@ func (ctl *ToolController) UpdateTool(c *gin.Context) {
 	f, err := ctl.client.Tool.
 		UpdateOne(&obj).
 		SetToolName(obj.ToolName).
-		SetToolAmount(obj.ToolAmount).
 		Save(context.Background())
 	if err != nil {
 		c.JSON(400, gin.H{"error": "update failed",})

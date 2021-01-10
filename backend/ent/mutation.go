@@ -941,7 +941,6 @@ type OperativeMutation struct {
 	op                                Op
 	typ                               string
 	id                                *int
-	operative_Type                    *string
 	operative_Name                    *string
 	clearedFields                     map[string]struct{}
 	_Operative_Operativerecord        map[int]struct{}
@@ -1027,43 +1026,6 @@ func (m *OperativeMutation) ID() (id int, exists bool) {
 		return
 	}
 	return *m.id, true
-}
-
-// SetOperativeType sets the operative_Type field.
-func (m *OperativeMutation) SetOperativeType(s string) {
-	m.operative_Type = &s
-}
-
-// OperativeType returns the operative_Type value in the mutation.
-func (m *OperativeMutation) OperativeType() (r string, exists bool) {
-	v := m.operative_Type
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldOperativeType returns the old operative_Type value of the Operative.
-// If the Operative object wasn't provided to the builder, the object is fetched
-// from the database.
-// An error is returned if the mutation operation is not UpdateOne, or database query fails.
-func (m *OperativeMutation) OldOperativeType(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, fmt.Errorf("OldOperativeType is allowed only on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, fmt.Errorf("OldOperativeType requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldOperativeType: %w", err)
-	}
-	return oldValue.OperativeType, nil
-}
-
-// ResetOperativeType reset all changes of the "operative_Type" field.
-func (m *OperativeMutation) ResetOperativeType() {
-	m.operative_Type = nil
 }
 
 // SetOperativeName sets the operative_Name field.
@@ -1159,10 +1121,7 @@ func (m *OperativeMutation) Type() string {
 // this mutation. Note that, in order to get all numeric
 // fields that were in/decremented, call AddedFields().
 func (m *OperativeMutation) Fields() []string {
-	fields := make([]string, 0, 2)
-	if m.operative_Type != nil {
-		fields = append(fields, operative.FieldOperativeType)
-	}
+	fields := make([]string, 0, 1)
 	if m.operative_Name != nil {
 		fields = append(fields, operative.FieldOperativeName)
 	}
@@ -1174,8 +1133,6 @@ func (m *OperativeMutation) Fields() []string {
 // not set, or was not define in the schema.
 func (m *OperativeMutation) Field(name string) (ent.Value, bool) {
 	switch name {
-	case operative.FieldOperativeType:
-		return m.OperativeType()
 	case operative.FieldOperativeName:
 		return m.OperativeName()
 	}
@@ -1187,8 +1144,6 @@ func (m *OperativeMutation) Field(name string) (ent.Value, bool) {
 // or the query to the database was failed.
 func (m *OperativeMutation) OldField(ctx context.Context, name string) (ent.Value, error) {
 	switch name {
-	case operative.FieldOperativeType:
-		return m.OldOperativeType(ctx)
 	case operative.FieldOperativeName:
 		return m.OldOperativeName(ctx)
 	}
@@ -1200,13 +1155,6 @@ func (m *OperativeMutation) OldField(ctx context.Context, name string) (ent.Valu
 // type mismatch the field type.
 func (m *OperativeMutation) SetField(name string, value ent.Value) error {
 	switch name {
-	case operative.FieldOperativeType:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetOperativeType(v)
-		return nil
 	case operative.FieldOperativeName:
 		v, ok := value.(string)
 		if !ok {
@@ -1264,9 +1212,6 @@ func (m *OperativeMutation) ClearField(name string) error {
 // defined in the schema.
 func (m *OperativeMutation) ResetField(name string) error {
 	switch name {
-	case operative.FieldOperativeType:
-		m.ResetOperativeType()
-		return nil
 	case operative.FieldOperativeName:
 		m.ResetOperativeName()
 		return nil
@@ -1904,7 +1849,6 @@ type ToolMutation struct {
 	typ                          string
 	id                           *int
 	_Tool_Name                   *string
-	_Tool_Amount                 *string
 	clearedFields                map[string]struct{}
 	_Tool_Operativerecord        map[int]struct{}
 	removed_Tool_Operativerecord map[int]struct{}
@@ -2028,43 +1972,6 @@ func (m *ToolMutation) ResetToolName() {
 	m._Tool_Name = nil
 }
 
-// SetToolAmount sets the Tool_Amount field.
-func (m *ToolMutation) SetToolAmount(s string) {
-	m._Tool_Amount = &s
-}
-
-// ToolAmount returns the Tool_Amount value in the mutation.
-func (m *ToolMutation) ToolAmount() (r string, exists bool) {
-	v := m._Tool_Amount
-	if v == nil {
-		return
-	}
-	return *v, true
-}
-
-// OldToolAmount returns the old Tool_Amount value of the Tool.
-// If the Tool object wasn't provided to the builder, the object is fetched
-// from the database.
-// An error is returned if the mutation operation is not UpdateOne, or database query fails.
-func (m *ToolMutation) OldToolAmount(ctx context.Context) (v string, err error) {
-	if !m.op.Is(OpUpdateOne) {
-		return v, fmt.Errorf("OldToolAmount is allowed only on UpdateOne operations")
-	}
-	if m.id == nil || m.oldValue == nil {
-		return v, fmt.Errorf("OldToolAmount requires an ID field in the mutation")
-	}
-	oldValue, err := m.oldValue(ctx)
-	if err != nil {
-		return v, fmt.Errorf("querying old value for OldToolAmount: %w", err)
-	}
-	return oldValue.ToolAmount, nil
-}
-
-// ResetToolAmount reset all changes of the "Tool_Amount" field.
-func (m *ToolMutation) ResetToolAmount() {
-	m._Tool_Amount = nil
-}
-
 // AddToolOperativerecordIDs adds the Tool_Operativerecord edge to Operativerecord by ids.
 func (m *ToolMutation) AddToolOperativerecordIDs(ids ...int) {
 	if m._Tool_Operativerecord == nil {
@@ -2121,12 +2028,9 @@ func (m *ToolMutation) Type() string {
 // this mutation. Note that, in order to get all numeric
 // fields that were in/decremented, call AddedFields().
 func (m *ToolMutation) Fields() []string {
-	fields := make([]string, 0, 2)
+	fields := make([]string, 0, 1)
 	if m._Tool_Name != nil {
 		fields = append(fields, tool.FieldToolName)
-	}
-	if m._Tool_Amount != nil {
-		fields = append(fields, tool.FieldToolAmount)
 	}
 	return fields
 }
@@ -2138,8 +2042,6 @@ func (m *ToolMutation) Field(name string) (ent.Value, bool) {
 	switch name {
 	case tool.FieldToolName:
 		return m.ToolName()
-	case tool.FieldToolAmount:
-		return m.ToolAmount()
 	}
 	return nil, false
 }
@@ -2151,8 +2053,6 @@ func (m *ToolMutation) OldField(ctx context.Context, name string) (ent.Value, er
 	switch name {
 	case tool.FieldToolName:
 		return m.OldToolName(ctx)
-	case tool.FieldToolAmount:
-		return m.OldToolAmount(ctx)
 	}
 	return nil, fmt.Errorf("unknown Tool field %s", name)
 }
@@ -2168,13 +2068,6 @@ func (m *ToolMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetToolName(v)
-		return nil
-	case tool.FieldToolAmount:
-		v, ok := value.(string)
-		if !ok {
-			return fmt.Errorf("unexpected type %T for field %s", value, name)
-		}
-		m.SetToolAmount(v)
 		return nil
 	}
 	return fmt.Errorf("unknown Tool field %s", name)
@@ -2228,9 +2121,6 @@ func (m *ToolMutation) ResetField(name string) error {
 	switch name {
 	case tool.FieldToolName:
 		m.ResetToolName()
-		return nil
-	case tool.FieldToolAmount:
-		m.ResetToolAmount()
 		return nil
 	}
 	return fmt.Errorf("unknown Tool field %s", name)

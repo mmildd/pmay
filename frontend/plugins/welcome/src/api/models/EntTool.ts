@@ -27,12 +27,6 @@ import {
  */
 export interface EntTool {
     /**
-     * ToolAmount holds the value of the "Tool_Amount" field.
-     * @type {string}
-     * @memberof EntTool
-     */
-    toolAmount?: string;
-    /**
      * ToolName holds the value of the "Tool_Name" field.
      * @type {string}
      * @memberof EntTool
@@ -62,7 +56,6 @@ export function EntToolFromJSONTyped(json: any, ignoreDiscriminator: boolean): E
     }
     return {
         
-        'toolAmount': !exists(json, 'Tool_Amount') ? undefined : json['Tool_Amount'],
         'toolName': !exists(json, 'Tool_Name') ? undefined : json['Tool_Name'],
         'edges': !exists(json, 'edges') ? undefined : EntToolEdgesFromJSON(json['edges']),
         'id': !exists(json, 'id') ? undefined : json['id'],
@@ -78,7 +71,6 @@ export function EntToolToJSON(value?: EntTool | null): any {
     }
     return {
         
-        'Tool_Amount': value.toolAmount,
         'Tool_Name': value.toolName,
         'edges': EntToolEdgesToJSON(value.edges),
         'id': value.id,

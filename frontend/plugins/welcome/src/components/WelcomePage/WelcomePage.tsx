@@ -64,23 +64,23 @@ const Operativerecord: FC<{ email: string }> = email => {
   const [nurses, setNurses] = React.useState<EntNurse[]>([]);
 
   const getNurse = async () => {
-    const res = await http.listNurse({ limit: -1, offset: 0 });
+    const res = await http.listNurse({ limit: 2, offset: 0 });
     setNurses(res);
     console.log(res);
   };
 
   const getExaminationroom = async () => {
-    const res = await http.listExaminationroom({ limit: -1, offset: 0 });
+    const res = await http.listExaminationroom({ limit: 3, offset: 0 });
     setExaminationrooms(res);
   };
 
   const getTool = async () => {
-    const res = await http.listTool({ limit: -1, offset: 0 });
+    const res = await http.listTool({ limit: 3, offset: 0 });
     setTools(res);
   };
 
   const getOperative = async () => {
-    const res = await http.listOperative({ limit: -1, offset: 0 });
+    const res = await http.listOperative({ limit: 3, offset: 0 });
     setOperatives(res);
   };
 
@@ -92,9 +92,8 @@ const Operativerecord: FC<{ email: string }> = email => {
     getNurse();
   }, []);
 
-  const AddedhandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setAdded(event.target.value as string);
-    console.log();
+  const AddedhandleChange = (event: any) => {
+    setOperativeTime(event.target.value as string);
   };
   const NursehandleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setNurseID(event.target.value as number);
@@ -116,7 +115,7 @@ const Operativerecord: FC<{ email: string }> = email => {
     console.log();
   };
 
-  const [addeds, setAdded] = React.useState(String);
+  const [added, setOperativeTime] = React.useState(String);
   const [nurseID, setNurseID] = React.useState(Number);
   const [examinationroomID, setExaminationroomID] = React.useState(Number);
   const [toolID, setToolID] = React.useState(String);
@@ -136,7 +135,7 @@ const Operativerecord: FC<{ email: string }> = email => {
   });
 
   const operativerecords = {
-    added: addeds,
+    added: added + ":00+00:00",
     nurse: nurseID,
     examinationroom: examinationroomID,
     tool: toolID,
@@ -282,6 +281,8 @@ const Operativerecord: FC<{ email: string }> = email => {
               </FormControl>
             </Grid>
 
+            
+
 
             <Grid item xs={3}>
               <div className={classes.paper}>เวลา</div>
@@ -292,7 +293,7 @@ const Operativerecord: FC<{ email: string }> = email => {
                   label="เลือกเวลา"
                   name="added"
                   type="date"
-                  value={addeds || ''} // (undefined || '') = ''
+                  value={added} // (undefined || '') = ''
                   className={classes.textField}
                   InputLabelProps={{
                     shrink: true,
